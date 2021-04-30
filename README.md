@@ -1,1 +1,1 @@
-# PHI-photodetector
+# PHI-thermstor
