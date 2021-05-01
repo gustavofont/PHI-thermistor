@@ -37,7 +37,7 @@ def main():
     VTEMP = I * R_of_T(T_ambiente) 
 
     # Self-heating temperature voltage (noise)
-    VNOISE = I * R_of_T(T_ambiente) - I * R_of_T(T_ntc) # NTC -> greater T -> lower R -> lower V = I * R
+    VNOISE = I * R_of_T(T_ntc) - I * R_of_T(T_ambiente) # NTC -> greater T -> lower R -> lower V = I * R
 
     plot(t, T_ambiente - 273)
     plot(t, T_ntc - 273)
