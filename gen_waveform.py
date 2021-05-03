@@ -28,9 +28,12 @@ def main():
     def T_of_R(R):
         return beta / np.log(R / (R0 * np.exp(-beta/T0)))
 
+    print(I * R_of_T(0 + 273))
+    print(I * R_of_T(100 + 273))
+
     t = np.arange(0, 100 * np.pi, 0.1)
     
-    T_ambiente = (np.sin(t) + 2) * 20 + 273 # Kelvin
+    T_ambiente = (np.sin(t) + 1) * 50 + 273 # Kelvin
     T_ntc = R_of_T(T_ambiente) * I * I / K + T_ambiente # Kelvin
 
     # Ambient temperature voltage
