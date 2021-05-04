@@ -28,8 +28,6 @@ def main():
     def T_of_R(R):
         return beta / np.log(R / (R0 * np.exp(-beta/T0)))
 
-    print(I * R_of_T(0 + 273))
-    print(I * R_of_T(100 + 273))
 
     t = np.arange(0, 100 * np.pi, 0.1)
     
@@ -42,9 +40,24 @@ def main():
     # Self-heating temperature voltage (noise)
     VNOISE = I * R_of_T(T_ntc) - I * R_of_T(T_ambiente) # NTC -> greater T -> lower R -> lower V = I * R
 
-    plot(t, T_ambiente - 273)
-    plot(t, T_ntc - 273)
-    plot(t, T_ntc - T_ambiente)
+    V = VTEMP + VNOISE
+
+    V1_ntc = np.min(V)
+    V2_ntc = np.max(V)
+
+    # Range de tensão do conversor AD
+    V1_ad = 0
+    V2_ad = 1
+
+    G = (V2_ad - V1_ad) / (V2_ntc - V1_ntc)
+    DC = V1_ad - V1_ntc * G
+
+    print("AC = %f" % (G * 1000))
+    print("DC = %f" % DC)
+
+    #plot(t, T_ambiente - 273)
+    #plot(t, T_ntc - 273)
+    #plot(t, T_ntc - T_ambiente)
 
     with open("VTEMP_waveform.txt", "w") as f:
         for point in zip(t, VTEMP):
